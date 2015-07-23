@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>Tests for CustomEvent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div id="listener">Listener</div>
+
+  <script src="../index.js"></script>
+  <script>
+    var el = document.getElementById('listener');
+
+    // Create an arbitrary processor for event details.
+    function process(obj) {
+      for (var k in obj) {
+        if ( obj.hasOwnProperty(k) ) {
+          console.log(k + ': ' + obj[k]);
+        }
+      }
+    }
+
+    // Add an appropriate event listener.
+    el.addEventListener('cat', function(e) {
+      process(e.detail);
+    });
+
+    // Create and dispatch the event.
+    var event = new CustomEvent('cat', {'detail': {'hazcheeseburger': true} });
+    el.dispatchEvent(event);
+  </script>
+</body>
+</html>
